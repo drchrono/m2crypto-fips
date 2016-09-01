@@ -2,6 +2,7 @@
 /* $Id$ */
 
 %{
+#include <openssl/crypto.h>
 #include <openssl/dh.h>
 #include <openssl/err.h>
 #include <openssl/evp.h>
@@ -358,6 +359,12 @@ int passphrase_callback(char *buf, int num, int v, void *arg) {
 
 %inline %{
 void lib_init() {
+    if(!FIPS_mode_set(1)) {
+        ERR_print_errors_fp(stderr);
+        exit(1);
+    } else {
+        fprintf(stderr,"*** IN FIPS MODE ***\n");
+    }
     SSLeay_add_all_algorithms();
     ERR_load_ERR_strings();
 }
