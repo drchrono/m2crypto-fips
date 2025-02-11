@@ -1,0 +1,17 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: m2crypto-fips
+  description: M2Crypto fork with FIPS mode init
+  annotations:
+    business-unit: EverHealth
+    github.com/project-slug: drchrono/m2crypto-fips
+    product: DRC
+spec:
+  type: service
+  lifecycle: production
+  owner: EverHealth
+  implementation:
+    languages:
+    - C
+    - Python
